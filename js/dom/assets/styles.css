@@ -1,0 +1,4 @@
+div {position: relative; color: #fff;}
+div > div { left: 15px; background: red;}
+div > div > div { left: 25px; background: green;}
+div > div > div > div { left: 35px; background: blue;}

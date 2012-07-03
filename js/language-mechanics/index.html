@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>Front-end quiz – Language mechanics</title>
+    <link href="../../common-assets/page.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>JavaScript &gt; Language mechanics</h1>
+    <dl class="qz-qa">
+        <dt>Open the console. Explain the output: order, values, errors.</dt>
+        <dd>[ Your answer here ]</dd>
+    </dl>
+
+    <hr/>
+    
+    <xmp>
+    var v1 = null,
+        v2 = null;
+
+    (function(){
+
+        var v1 = 'V-one';
+
+        v2 = 'V-two';
+
+        f1 = function() {
+            console.log('(3):', v1, v2);
+        };
+
+        var f2 = function() {
+            console.log('(4):', v1, v2)
+        } 
+
+        console.log('(1):', v1, v2);
+      
+    }());
+
+
+    console.log('(2):', v1, v2);
+    f1();
+    f2();
+    </xmp>
+
+    <script src="../../common-assets/modernizr.custom.26065.js"></script>
+    <script src="assets/scripts.js"></script>
+</body>
+</html>

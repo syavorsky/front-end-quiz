@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>Front-end quiz – DOM interactions</title>
+    <link href="../../common-assets/page.css" rel="stylesheet" />
+</head>
+<body>
+    <h1>JavaScript &gt; Classes and Objects</h1>
+    <p>See scripts loaded on this page, check the console</p>
+    <dl class="qz-qa">
+        <dt>Is there any difference between these two class definitions</dt>
+        <dd>[ your answer ]</dd>
+
+        <dt>Add methods getter/setter methods (i.g. get_name(name), set_name()) to the classes and change say_hi() text to be "Hi, my name is %name%"!</dt>
+        <dd>[ your answer ]</dd>
+
+        <dt>Change class definition to implement the Singleton pattern</dt>
+        <dd>[ your answer ]</dd>
+    </dl>
+
+    <hr/>
+
+<xmp>
+function MyClass1 () {
+  this.say_hi = function() {
+    console.log('MyClass1 says HI!');
+  };
+}
+
+function MyClass2 () {}
+
+MyClass2.prototype.say_hi = function() {
+  console.log('MyClass2 says HI!');
+};
+
+var inst1 = new MyClass1(),
+    inst2 = new MyClass2();
+
+inst1.say_hi();
+inst2.say_hi();
+</xmp>
+
+    <script src="../../common-assets/modernizr.custom.26065.js"></script>
+    <script src="assets/scripts.js"></script>
+</body>
+</html>

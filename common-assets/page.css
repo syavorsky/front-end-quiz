@@ -1,0 +1,44 @@
+
+body {
+    margin: 40px;
+    padding: 0;
+    font-family: sans-serif;
+    background: url(bg-body.png);
+}
+
+    h1, h2 {
+        font-weight: normal;
+        margin: 0 0 15px;
+        padding: 0;
+        text-shadow: 1px 1px #fff;
+    }
+
+    .qz-qa {
+        margin: 0 0 20px;
+        padding: 0;
+    }
+        .qz-qa > dt {
+            margin: 0 0 10px;
+            padding: 0;
+        }
+        .qz-qa > dd {
+            margin: 0 0 20px;
+            padding: 0;
+        }
+
+        .qz-qa > dt:before,
+        .qz-qa > dd:before {
+            display: inline-block;
+            margin: 0 15px 0 0;
+            font-size: 20px;
+            font-style: italic;
+            color: #ccc;
+        }
+
+        .qz-qa > dt:before {
+            content: "Q:";
+        }
+
+        .qz-qa > dd:before {
+            content: "A:";
+        }
