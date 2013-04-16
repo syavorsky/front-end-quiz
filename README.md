@@ -10,4 +10,4 @@ All tests assumes you run them in recent Chrome or Firefox browsers unless you s
 # What matters
 - If you are unable to complete the task, show your progress, commit partial work. 
 - give detailed answers, explain the problem you faced, if any.
-- watch you commits and code style.
+- watch your commits and code style.
