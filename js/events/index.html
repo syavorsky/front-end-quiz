@@ -28,7 +28,7 @@
         </dt>
         <dd>
     <xmp>
-    //your working  js code goes here
+    // your code
     </xmp>
         </dd>
 
@@ -37,7 +37,7 @@
         </dt>
         <dd>
     <xmp>
-    //your working  js code goes here
+    // your code
     </xmp>
         </dd>
     </dl>
@@ -46,13 +46,13 @@
 
 <xmp>
 (function(){
-    
+
     $('#items li').live('click', function(){ console.log('(3) Assigned with live()'); });
-    
+
     $('#items').delegate('li', 'click', function() { console.log('(2) Assigned with delegate()'); });
-                                                 
+
     $('#items li').click(function(){ console.log('(1) Assigned with click()'); });
-                                      
+
 }(jQuery));
 </xmp>
 
