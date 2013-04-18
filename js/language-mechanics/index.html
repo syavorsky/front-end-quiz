@@ -9,7 +9,7 @@
     <h1>JavaScript &gt; Language mechanics</h1>
     <dl class="qz-qa">
         <dt>Open the console. Explain the output: order, values, errors.</dt>
-        <dd>[ Your answer here ]</dd>
+        <dd>The variables are initialized to 'null' above the main function. Next, the main function is called. The variables v1 and v2 are given string values, with v1 being a private variable/local scope. f1 and f2 are defined but have not been called yet, where f2 is private/local scope. Then the console output (1) is reached and its output is given in the console with the string values of v1 and v2. Then we exit the function and encounter the  console output (2). v1 is given as null since its scope was defined outside the function. v2 is given the string value because its value was overriden in the main function. Now f1 is called. Since f1 was public, we can enter the function and now we reach console output (3). v1 and v2 are given the string values as defined in the main function. now that the command in the function f1 has been executed, we now proceed to the call of f2. Here we are given the error of "ReferenceError: f2 is not defined." We get this error because f2 was declared as private (given local scope) inside the main function and cannot be accessed outside the main function.</dd>
     </dl>
 
     <hr/>

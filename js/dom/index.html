@@ -11,27 +11,102 @@
     Assume you have only native JS functions available.
     <dl class="qz-qa">
         <dt>Find left position of #d element relatively to the body element</dt>
-        <dd>
-    <xmp>
-    // your code
-    </xmp>
+        <dd>Left Offset = 75px
+	<xmp>
+	(function(){
+		var newCoordinates = function findPos(element) {
+			var element = document.getElementById("d");
+			var offsetX = 0;
+			if (element.offsetParent) {
+				do {
+					if (element.offsetParent != null && element.offsetParent.tagName.toLowerCase() != "body") {
+						offsetX += element.offsetLeft;
+					}
+				} while (element = element.offsetParent);
+			}
+			return {x: offsetX};
+		}
+		var coordinates = newCoordinates();
+		console.log(coordinates.x);
+	}());
+	</xmp>
         </dd>
-
-        <dt>Modify you code to do same calculation for any nesting level of the #d</dt>
-        <dd>
-    <xmp>
-    // your code
-    </xmp>
+        <dt>Modify your code to do same calculation for any nesting level of the #d</dt>
+        <dd>Added a child div with text e. Left offset 25px from #d. Used "children[0]" to find total Left offset = 100px for first child of #d.
+	<xmp>
+	(function(){
+		var newCoordinates = function findPos(element) {
+			var element = document.getElementById("d").children[0];
+			var offsetX = 0;
+			if (element.offsetParent) {
+				do {
+					if (element.offsetParent != null && element.offsetParent.tagName.toLowerCase() != "body") {
+						offsetX += element.offsetLeft;
+					}
+				} while (element = element.offsetParent);
+			}
+			return {x: offsetX};
+		}
+		var coordinates = newCoordinates();
+		console.log(coordinates.x);
+	}());
+	</xmp>
         </dd>
     </dl>
 
     <div>
         <div>
             <div>
-                <div id="d">#d</div>
+                <div id="d">
+					#d
+					<div style="background: red; left: 25px;">
+						e
+					</div>
+				</div>
             </div>
         </div>
     </div>
 
+	<script type="text/javascript">
+		// PART 1
+		(function(){
+			var newCoordinates = function findPos(element) {
+				var element = document.getElementById("d");
+				var offsetX = 0;
+				if (element.offsetParent) {
+					do {
+						if (element.offsetParent != null && element.offsetParent.tagName.toLowerCase() != "body") {
+							offsetX += element.offsetLeft;
+						}
+					} while (element = element.offsetParent);
+				}
+				return {x: offsetX};
+			}
+			var coordinates = newCoordinates();
+			console.log(coordinates.x);
+		}());
+		
+		
+		// PART 2
+		(function(){
+			var newCoordinates = function findPos(element) {
+				var element = document.getElementById("d").children[0];
+				var offsetX = 0;
+				if (element.offsetParent) {
+					do {
+						if (element.offsetParent != null && element.offsetParent.tagName.toLowerCase() != "body") {
+							offsetX += element.offsetLeft;
+						}
+					} while (element = element.offsetParent);
+				}
+				return {x: offsetX};
+			}
+			var coordinates = newCoordinates();
+			console.log(coordinates.x);
+		}());
+	</script>
+	
 </body>
 </html>
+
+

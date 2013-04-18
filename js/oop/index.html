@@ -10,13 +10,75 @@
     <p>See scripts loaded on this page, check the console</p>
     <dl class="qz-qa">
         <dt>Is there any difference between these two class definitions</dt>
-        <dd>[ your answer ]</dd>
+        <dd>In the first class definition, when the class is created, a new 'say_hi' is created just for that class. 
+		---------
+		In the second class definition, just one 'say_hi' function is created and is used for all MyClass2's since MyClass2.prototype is the parent of MyClass2. When the MyClass2 object is created, it inherits the properties (say_hi) of its constructor's prototype. second method is more efficient.</dd>
 
         <dt>Add methods getter/setter methods (i.g. get_name(name), set_name()) to the classes and change say_hi() text to be "Hi, my name is %name%"!</dt>
-        <dd>[ your answer ]</dd>
+        <dd>see code below:
+<xmp>
+	// Add getters & setters
+	function MyClass1 () {
+		this.say_hi = function() {
+			console.log('Hi, my name is ' + name + '!');
+		};
+		
+		// name
+		var name = name;
+		this.get_name = function() {
+			return name;
+		}
+		this.set_name = function(value) {
+			name = value;
+		}
+	}
+
+	function MyClass2 () {
+		// name
+		this.get_name = function() {
+			return name;
+		}
+		this.set_name = function(value) {
+			name = value;
+		}
+	}
+	MyClass2.prototype.say_hi = function() {
+		console.log('Hi, my name is ' + name + '!');
+	};
+
+	var inst1 = new MyClass1(),
+		inst2 = new MyClass2();
+	
+	inst1.set_name('Class1');
+	inst2.set_name('Class2');
+	
+	inst1.say_hi();
+	inst2.say_hi();
+</xmp>
+		</dd>
 
         <dt>Change class definition to implement the Singleton pattern</dt>
-        <dd>[ your answer ]</dd>
+        <dd>see code below. I have not had to implement a singleton pattern before (or the interaction of singleton and javascript's prototype), so I researched as much as I could on how to implement this.
+<xmp>
+	var inst1 = new function() {
+		this.name = "Class1";
+		this.say_hi = function() {
+			console.log('Hi, my name is ' + this.name + '!');
+		};
+	}
+
+	var MyClass2 = function() {
+		this.name = "Class2";
+	}
+	MyClass2.prototype.say_hi = function () {
+		console.log('Hi, my name is ' + this.name + '!');
+	};
+	var inst2 = new MyClass2();
+
+	inst1.say_hi();
+	inst2.say_hi();		
+</xmp>
+		</dd>
     </dl>
 
     <hr/>
@@ -43,5 +105,67 @@ inst2.say_hi();
 
     <script src="../../common-assets/modernizr.custom.26065.js"></script>
     <script src="assets/scripts.js"></script>
+	
+	<script type="text/javascript">
+		// Add getters & setters
+		function MyClass1 () {
+			this.say_hi = function() {
+				console.log('Hi, my name is ' + name + '!');
+			};
+			
+			// name
+			var name = name;
+			this.get_name = function() {
+				return name;
+			}
+			this.set_name = function(value) {
+				name = value;
+			}
+		}
+
+		function MyClass2 () {
+			// name
+			this.get_name = function() {
+				return name;
+			}
+			this.set_name = function(value) {
+				name = value;
+			}
+		}
+		MyClass2.prototype.say_hi = function() {
+			console.log('Hi, my name is ' + name + '!');
+		};
+
+		var inst1 = new MyClass1(),
+			inst2 = new MyClass2();
+		
+		inst1.set_name('Class1');
+		inst2.set_name('Class2');
+		
+		inst1.say_hi();
+		inst2.say_hi();
+		
+		
+		
+		// Singleton Pattern
+		var inst1 = new function() {
+			this.name = "Class1";
+			this.say_hi = function() {
+				console.log('Hi, my name is ' + this.name + '!');
+			};
+		}
+		
+		var MyClass2 = function() {
+			this.name = "Class2";
+		}
+		MyClass2.prototype.say_hi = function () {
+			console.log('Hi, my name is ' + this.name + '!');
+		};
+		var inst2 = new MyClass2();
+		
+		inst1.say_hi();
+		inst2.say_hi();
+	</script>
+	
 </body>
 </html>

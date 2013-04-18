@@ -16,28 +16,81 @@
         <dt>
             Explain in few sentences the difference between these 3 ways of binding event listeners.
         </dt>
-        <dd>[ your answer ]</dd>
+        <dd>
+		(1) Assigned with click(): The function is bound to the click event of the matched element "#items li". The handler is bound 'directly' to the matched element. if the element is removed, then the handler won't exist anymore. if a matched element is added after the page has already loaded, the handler won't work for it. 
+		---------
+		(2) Assigned with delegate(): Event handlers are attached to the specified elements ('li') that are children of selected element ("#items"), and a function is run when the event occurs. the event handler works on all elements that match the selector, either at page load or in the future
+		---------
+		(3) Assigned with live(): the event handlers are attached to the selected elements (#items li), and the function is run when the event occurs. like delegate, the event handler works on all elements that match the selector, either at page load or in the future
+		</dd>
 
         <dt>
             Explain the order of output coming from handler.
         </dt>
-        <dd>[ your answer ]</dd>
-
+        <dd>The order of coming from the handler in the console is 1, 2, 3 even though the order in the script is 3, 2, 1. 
+		---------
+		click() shows up first because it was fired directly with the click event. 
+		---------
+		Now that the click occurred, the even propogates up the DOM tree from the parent element  all the way to the document 
+		---------
+		delegate() shows up second because it is called when the event bubbles up to the "#items" element, which is the direct parent of the element being clicked (li) 
+		---------
+		live() shows up last because it is not called until the event bubbles up all the way to the document node, until which it can now check to see if the event was a click and the target element matched "#items li"
+		</dd>
         <dt>
             Replicate same functionality for all three cases using only native JS handling (addEventListener)
         </dt>
-        <dd>
+        <dd>I was not able to complete the delegate() or live() in pure javascript in the current time frame. I would need to do more research on it or see similar examples so that I can familiarize myself with the specific syntax and best approaches. This is something I really want to learn. I paritlaly implemented the click().
     <xmp>
-    // your code
+
+	// Javascript
+	(function(){
+		
+		// live() in Javascript
+		//document.addEventListener('click', select_element, true);
+		//var el = document.getElementsByTagName("li"); 
+		//var el = GetElementInsideContainer("#items", "li");
+		//el.addEventListener("click", function() {
+		//	console.log('*(2) Assigned with live()*'); 
+		//}, true);
+		
+		
+		// delegate() in Javascript
+		
+		
+		// click() in Javascript			
+		var element = document.getElementsByTagName("li"); 
+		for(var i=0; i < element.length; i++){ 
+			element[i].onclick = function(){ 
+				console.log('*(1) Assigned with click()*'); 
+			} 
+		}		
+	}());
+	
     </xmp>
         </dd>
 
         <dt>
             Replicate same functionality for all three cases using only Prototype's Element.on()
         </dt>
-        <dd>
+        <dd>I also was not able to complete this in the time frame in prototype. I would need to do more research to familiarize myself with the specific syntax and best approaches. I also would be happy to learn this. My current experience in prototype has been to convert a web application away from prototype to jquery. I have not used prototype for other web projects.
     <xmp>
-    // your code
+	// Prototype
+	document.observe('dom:loaded', function() {
+		//live() in Prototype
+		
+		//delegate() in Prototype
+		
+		//click() in Prototype
+		//Element.on('#items li');
+		//var div_height = Element.getHeight('#items li');
+		//console.log(div_height);
+		
+		
+		//$().'li', 'click', function(){
+		//	console.log('p');
+		//});
+	});
     </xmp>
         </dd>
     </dl>
@@ -47,11 +100,17 @@
 <xmp>
 (function(){
 
-    $('#items li').live('click', function(){ console.log('(3) Assigned with live()'); });
+	$('#items li').live('click', function(){ 
+		console.log('(3) Assigned with live()'); 
+	});
 
-    $('#items').delegate('li', 'click', function() { console.log('(2) Assigned with delegate()'); });
+	$('#items').delegate('li', 'click', function() { 
+		console.log('(2) Assigned with delegate()'); 
+	});
 
-    $('#items li').click(function(){ console.log('(1) Assigned with click()'); });
+	$('#items li').click(function(){ 
+		console.log('(1) Assigned with click()'); 
+	});
 
 }(jQuery));
 </xmp>
@@ -60,10 +119,63 @@
         <li>Item 1. Click me</li>
         <li>Item 2. Click me</li>
         <li>Item 3. Click me</li>
-    ​</ul>​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
-
+    ​</ul>
+	​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+	<!--INCLUDE PROTOTYPE TEMPORARILY-->
+	<script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js"></script>
+	
+	<!--
     <script src="../../common-assets/jquery.1.7.2.js"></script>
-    <script src="../../common-assets/modernizr.custom.26065.js"></script>
+	<script src="../../common-assets/modernizr.custom.26065.js"></script>
     <script src="assets/scripts.js"></script>
+	-->
+	
+	<script type="text/javascript">
+		
+		// Javascript
+		(function(){
+			//live() in Javascript
+			//document.addEventListener('click', select_element, true);
+			//var el = document.getElementsByTagName("li"); 
+			//var el = GetElementInsideContainer("#items", "li");
+			//el.addEventListener("click", function() {
+			//	console.log('*(2) Assigned with live()*'); 
+			//}, true);
+			
+			
+			//delegate() in Javascript
+			
+			
+			//click() in Javascript			
+			var element = document.getElementsByTagName("li"); 
+			for(var i=0; i < element.length; i++){ 
+				element[i].onclick = function(){ 
+					console.log('*(1) Assigned with click()*'); 
+				} 
+			}
+			
+		}());
+		
+		
+		// Prototype
+		document.observe('dom:loaded', function() {
+			//live() in Prototype
+			
+			
+			//delegate() in Prototype
+			
+			
+			//click() in Prototype
+			//Element.on('#items li');
+			//var div_height = Element.getHeight('#items li');
+			//console.log(div_height);
+			
+			
+			//$().'li', 'click', function(){
+			//	console.log('p');
+			//});
+		});
+	</script>
+	
 </body>
 </html>

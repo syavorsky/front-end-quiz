@@ -2,12 +2,13 @@
 <html>
 <head>
     <meta charset=utf-8 />
+	<meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible"/>
     <title>Front-end quiz – DOM interactions</title>
     <link href="../../common-assets/page.css" rel="stylesheet" />
     <link href="assets/styles.css" rel="stylesheet" />
 </head>
 <body>
-    <h1>JavaScript &gt; Events</h1>
+    <h1>CSS &gt; Navigation Bar</h1>
     <p>
         Use Chrome or Firefox for this quiz.
     </p>
@@ -16,20 +17,97 @@
             Create stylesheet to make navigation bar on this page to match the mock. Bar should take a full with
             and not wrap when window resized.
             You have 3 options of styling from easy to advanced, implement the one you can. All 3 can be done in a different way, ideally purelly with CSS.
-            Use fallback styles for incapable browsers, IE7 for the worst case. See page code for available helpers.
+            Use fallback styles for incapable browsers, IE7 for the worst case. See page code for available helpers. Add some implementation notes, describe possible crossbrowser issues.
         </dt>
-        <dd>Add some implementation notes, describe possible crossbrowser issues.</dd>
-
+        <dd>
+			I used 'Browser Mode: IE7', and 'Document Mode: Standards'. In this scenario it looked fine. When I switch to 'Document Mode: IE7 Standards', the style was not exactly the same. Additional work-arounds would need to be implemented for the border radius. I also had to reduce the percentage widths for the container and the li's 1% to 2% because I do not think IE7 recognizes the box-sizing: border box. Hover did not also immediately work in this mode and would require other workarounds. The gradient could have been implemented as an image, for example. Overall, the other changes i made other than css is to include the meta tag for '<meta content="IE=Edge,chrome=1" http-equiv="X-UA-Compatible"/>' and some additional nested elements in the 'li a' so that i can style them for 'Document Mode: IE7 Standards'. If I were doing this project for a client I would also have wanted additional specifications/requirements to make sure all the desired effects and the exact behavior are present.<br>
+		</dd>
         <img src="assets/mock.png" />
     </dl>
 
-    <ul>
-        <li><a href="#">Link 1</a></li>
-        <li><a href="#">Link 2</a></li>
-        <li><a href="#">Link 3</a></li>
-        <li><a href="#">Link 4</a></li>
-    </ul>
-
+	<style type="text/css">
+		.container, li, li a {
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+		.container {
+			background-color: #FFFFFF;
+			float: left;
+			margin-bottom: 25px;
+			min-width: 670px;
+			width: 99%;
+			padding: 25px;
+		}
+		ul {
+			float: left;
+			list-style: none outside none;
+			margin: 0;
+			padding: 0;
+			width: 99%;
+		}
+		li {
+			background-color: #EEEEEE;
+			border-radius: 15px 0 15px 0;
+			float: left;
+			padding: 5px;
+			width: 23%;
+		}
+		li a {
+			background: #CCCCCC;
+			background: linear-gradient(to bottom, #EEEEEE 0%, #CCCCCC 100%);
+			background: -moz-linear-gradient(#EEEEEE, #CCCCCC);
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #EEEEEE), color-stop(100%, #CCCCCC));
+			background: -webkit-linear-gradient(#EEEEEE, #CCCCCC);
+			background: -o-linear-gradient(#EEEEEE, #CCCCCC);
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EEEEEE', endColorstr='#CCCCCC');
+			-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#CCCCCC')";
+			zoom:1;
+			
+			border-radius: 10px 0 10px 0;
+			color: black;
+			float: left;
+			font-family: arial;
+			font-size: 16px;
+			padding: 10px 0;
+			text-align: center;
+			text-decoration: none;
+			text-shadow: 1px 1px 0 #FFFFFF;
+			min-width: 145px;
+			min-height: 20px;
+			width: 100%;
+		}
+		li a:hover {
+			text-decoration: none;
+			background: #CCCCCC;
+		}
+		li a div {
+			margin: 0 auto;
+			width: 60px;
+		}
+		li a div span {
+			float: left;
+		}
+		.arrow-right {
+			width: 0; 
+			height: 0; 
+			border-top: 5px solid transparent;
+			border-bottom: 5px solid transparent;
+			border-left: 5px solid #AAAAAA;
+			float: left;
+			margin: 5px 0 0 5px;
+		}	
+	</style>
+	
+	<div class="container">
+		<ul>
+			<li><a href="#"><div><span>Link 1</span><div class="arrow-right"></div></div></a></li>
+			<li><a href="#"><div><span>Link 2</span><div class="arrow-right"></div></div></a></li>
+			<li><a href="#"><div><span>Link 3</span><div class="arrow-right"></div></div></a></li>
+			<li><a href="#"><div><span>Link 4</span><div class="arrow-right"></div></div></a></li>
+		</ul>
+	</div>
+		
     <script src="../../common-assets/jquery.1.7.2.js"></script>
     <script src="../../common-assets/modernizr.custom.26065.js"></script>
 </body>

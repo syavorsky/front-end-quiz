@@ -12,28 +12,56 @@
 
     <dl class="qz-qa">
         <dt>hide all even rows</dt>
-        <dd>
+        <dd>Set 'visibility: hidden' on class name 'even'
     <xmp>
-    // your js code
+    $(function() {
+		$("ul .even").css("visibility", "hidden");
+	});
     </xmp>
         </dd>
 
         <dt>do same assuming there are no class names</dt>
-        <dd>
+        <dd>use ':odd' since elements are selected using a zero-index
     <xmp>
-    // your js code
+    $(function() {
+		$("ul :odd").css("visibility", "hidden");
+	});
     </xmp>
         </dd>
         <dt>Build two arrays containing odd and even rows respectively.</dt>
-        <dd>
+        <dd>Push odd and even rows into different arrays, then output in console
     <xmp>
-    // your js code
+    $(function() {
+		// Odd Rows
+		var oddRows = [];
+		$('ul :even').each(function (i, e) {
+			oddRows.push($(e).text());
+		});
+		console.log("Odd Rows");
+		$.each( oddRows, function( key, value ) {
+			console.log( key + ": " + value );
+		});
+		
+		// Even Rows
+		var evenRows = [];
+		$('ul :odd').each(function (i, e) {
+			evenRows.push($(e).text());
+		});
+		console.log("Even Rows");
+		$.each( evenRows, function( key, value ) {
+			console.log( key + ": " + value );
+		});
+	});
     </xmp>
         </dd>
         <dt>Rearrange nodes in reverse order</dt>
-        <dd>
+        <dd>Go though each li and preprend it to the parent node (this gives reverse order)
     <xmp>
-    // your js code
+    $(function() {
+		$('ul > li').each(function() {
+			$(this).prependTo(this.parentNode);
+		});
+	});
     </xmp>
         </dd>
     </dl>
@@ -41,7 +69,7 @@
     <p>
         Ability to demonstrate few possible ways to accomplish this is a plus.
     </p>
-
+	
     <ul>
         <li class="odd">line 1</li>
         <li class="even">line 2</li>
@@ -55,5 +83,50 @@
 
     <script src="../../common-assets/jquery.1.7.2.js"></script>
     <script src="../../common-assets/modernizr.custom.26065.js"></script>
+	
+	<script type="text/javascript">
+		/*
+		// hide all even rows
+		$(function() {
+			$("ul .even").css("visibility", "hidden");
+		});
+		
+		// do same assuming there are no class names
+		$(function() {
+			$("ul :odd").css("visibility", "hidden");
+		});
+		
+		// Build two arrays containing odd and even rows respectively.
+		$(function() {
+			// Odd Rows
+			var oddRows = [];
+			$('ul :even').each(function (i, e) {
+				oddRows.push($(e).text());
+			});
+			console.log("Odd Rows");
+			$.each( oddRows, function( key, value ) {
+				console.log( key + ": " + value );
+			});
+			
+			// Even Rows
+			var evenRows = [];
+			$('ul :odd').each(function (i, e) {
+				evenRows.push($(e).text());
+			});
+			console.log("Even Rows");
+			$.each( evenRows, function( key, value ) {
+				console.log( key + ": " + value );
+			});
+		});
+		
+		// Rearrange nodes in reverse order
+		$(function() {
+			$('ul > li').each(function() {
+				$(this).prependTo(this.parentNode);
+			});
+		});
+		*/
+		
+	</script>
 </body>
 </html>
