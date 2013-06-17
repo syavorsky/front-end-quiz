@@ -16,19 +16,51 @@
         <dt>
             Explain in few sentences the difference between these 3 ways of binding event listeners.
         </dt>
-        <dd>[ your answer ]</dd>
+        <dd>
+            The bind() method creates the event handler directly to the element it is attached to. With live() method the event is attached to the doucment and bubbles up to it.
+            Once it bubbles up jquery will check the event and which handler to invoke. The delegate() works similar to live() but instead of attaching to the document, the bind()
+            will be attached to the element you specify.
+        </dd>
 
         <dt>
             Explain the order of output coming from handler.
         </dt>
-        <dd>[ your answer ]</dd>
+        <dd>
+            Bind() method fires off first because it is directly binded to the li event queue. Delegate() is next because the event queue is actually
+            attached to the #items element and gets bubbled up to it. Live() is last because it event queue is on the docuemnt and it has to bubble up to the document.
+        </dd>
 
         <dt>
             Replicate same functionality for all three cases using only native JS handling (addEventListener)
         </dt>
         <dd>
     <xmp>
-    // your code
+    //Live
+    document.addEventListener("click", function(e){
+      var srcElement = e.srcElement || e.target;
+      if((srcElement.nodeName == "LI") && (srcElement.parentNode.id = "items")){
+        console.log('(3) Assigned with live JS');
+      }
+    }, false);
+
+    // Deletgate
+    var ul = document.getElementById('items');
+    ul.addEventListener("click", function(e){
+      var srcElement = e.srcElement || e.target;
+      if((srcElement.nodeName == "LI") ){
+        console.log('(2) Assigned with delegate JS');
+      }
+    }, false); 
+
+    // Click
+    var liNodes = ul.getElementsByTagName('li');
+    console.log(liNodes)
+    var li;
+    for(var i = 0; i < liNodes.length;i++){
+        liNodes[i].addEventListener("click", function(e){
+        console.log('(1) Assigned with bind JS');
+      }, false);
+    }
     </xmp>
         </dd>
 
@@ -37,7 +69,15 @@
         </dt>
         <dd>
     <xmp>
-    // your code
+    //Bind
+    $("items li").on("click", function() { console.log('(1) Assigned with delegate()'); });
+
+    //Delgate
+    $("items").on("click", "li", function() { console.log('(2) Assigned with delegate()'); });
+    
+    //Live
+    $(document).on("click", "item li", function() { console.log('(3) Assigned with delegate()'); });
+    
     </xmp>
         </dd>
     </dl>

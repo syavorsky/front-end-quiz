@@ -14,26 +14,55 @@
         <dt>hide all even rows</dt>
         <dd>
     <xmp>
-    // your js code
+    $('ul .even').css("display", "none");
+        
+    //or can use the cache selector method.
+    var $ul = $('ul');
+    $ul.find('li.even').css("display", "none");
     </xmp>
         </dd>
 
         <dt>do same assuming there are no class names</dt>
         <dd>
     <xmp>
-    // your js code
+    $("ul :odd").css("display", "none");
     </xmp>
         </dd>
         <dt>Build two arrays containing odd and even rows respectively.</dt>
-        <dd>
+        <dd>Not sure is you want an array of jquery objects or html objects.
     <xmp>
-    // your js code
+    var $ul = $('ul');
+    var $evenRows =  $ul.find('li.even');
+    var $oddRows =  $ul.find('li.odd');
     </xmp>
         </dd>
         <dt>Rearrange nodes in reverse order</dt>
         <dd>
     <xmp>
-    // your js code
+        
+    var $ul = $('ul');
+    var html,className, $li;
+    $.each($ul, function(index){
+        html = [];
+        $li = $(this).find('li').get().reverse();
+        $.each($li, function(i){
+            className = i%2 === 0 ? "odd" : "even";
+            html.push('<li class="'+className+'">'+$li[i].innerHTML+'</li>');
+        });
+        $(this).html(html.join(''));
+    });
+    
+    //this can be used also. but this is much slower due to the appendTo
+    $li = $('li').get().reverse();
+    $.each($li,function(i) {
+        className = i%2 === 0 ? "odd" : "even";
+        $(this).removeClass('odd even').addClass(className);
+        $(this).appendTo(this.parentNode);
+      });
+    });
+
+
+
     </xmp>
         </dd>
     </dl>
@@ -42,18 +71,71 @@
         Ability to demonstrate few possible ways to accomplish this is a plus.
     </p>
 
-    <ul>
+    <ul id="ulTest">
         <li class="odd">line 1</li>
         <li class="even">line 2</li>
         <li class="odd">line 3</li>
         <li class="even">line 4</li>
         <li class="odd">line 5</li>
-        <li class="even">line 6</li>
-        <li class="odd">line 7</li>
-        <li class="even">line 8</li>
     </ul>
-
+	
     <script src="../../common-assets/jquery.1.7.2.js"></script>
     <script src="../../common-assets/modernizr.custom.26065.js"></script>
+    <script>
+        $(document).ready(function () {
+    
+          var html = [];
+          var $ul = $('ul');
+          
+          for(var i=1;i <= 106; i++){
+             className = i%2 === 0 ? "even" : "odd";
+            html.push('<li class="'+className+'">line '+i+'</li>');
+          }
+          
+          $('#ulTest').html(html.join(''));
+        
+          var li;
+          console.time('test selector');
+          //var li;
+          //li = $ul.find('li.even').css("display", "none")//3ms
+          //li= $("ul .even").css("display", "none");//3ms with 1000 rows
+          //li= $("ul :even").css("display", "none");//4ms with 1000 rows
+          //li = $("ul .even").hide();//7ms with 1000 rows
+          //li = $('li.even', 'ul').hide();//7ms with 1000 rows
+          //li = $('li.even').hide();//8ms with 1000 rows with 1000 rows
+          //li = $ul.find('li:even').css("display", "none");//4ms with 1000 rows
+          console.timeEnd('test selector');
+    
+          console.time('test array');
+          var $evenRows = $('ul .even');
+          var $oddRows = $('ul .odd');
+          console.timeEnd('test array');
+    
+          $li = $('li').get().reverse();
+          
+    /*
+          console.time('test reverse');//43ms
+          $.each($li,function(i) {
+              className = i%2 === 0 ? "odd" : "even";
+              $(this).removeClass('odd even').addClass(className);
+              $(this).appendTo(this.parentNode);
+          });
+          console.timeEnd('test reverse');
+    */
+
+          console.time('test reverse');//5ms
+          $.each($ul, function(index){
+            html = [];
+            $li = $(this).find('li').get().reverse();
+            $.each($li, function(i){
+                className = i%2 === 0 ? "odd" : "even";
+                html.push('<li class="'+className+'">'+$li[i].innerHTML+'</li>');
+              })
+              $(this).html(html.join(''));
+            });
+          console.timeEnd('test reverse');
+        });
+
+    </script>
 </body>
 </html>
