@@ -9,7 +9,17 @@
     <h1>JavaScript &gt; Language mechanics</h1>
     <dl class="qz-qa">
         <dt>Open the console. Explain the output: order, values, errors.</dt>
-        <dd>[ Your answer here ]</dd>
+        <dd>
+			<p>This problem helps explain variable scope and anonymous functions. Anonymous functions are excuted at runtime this is why the first console statement is outputted since the console.log statement is within the anonymous  function.</p> 
+		
+			<p>The next console outputs explains variable scope in javascript. When "var" is not used when declaring an object it makes it a global object.</p>
+			<p>The second console statement is outputted "(2): null V-two". v1 and v2 were declared as a global variable with a null value. v2 was set within the anonymous function as 'V-two'. Since v2 has a global scope
+			the value can be set within the anonymous function. You might be asking yourself why v1 wasn't outputted as 'V-one' since the same name variable was declared in the anonymous function. It is because v1 was declared using "var" which makes it only local to the function, it wouldn't effect the global variable value even though it has the same variable name.</p>
+			<p>The third console outout is "(3): V-one V-two". f1 was declared as a global function since "var" wasn't use. The output 
+			uses the varibles set in the anonymous function since it is within the anonymous function scope.
+			</p>
+			<p>The fourth console output causes an error because the function is only available within the anonymous function scope, it is not global</p>
+		</dd>
     </dl>
 
     <hr/>

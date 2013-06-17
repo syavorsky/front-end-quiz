@@ -10,13 +10,71 @@
     <p>See scripts loaded on this page, check the console</p>
     <dl class="qz-qa">
         <dt>Is there any difference between these two class definitions</dt>
-        <dd>[ your answer ]</dd>
+        <dd>Yes there is a difference in memory usage. MyClass2 is more efficient, any instance of Myclass2 will use the same say_hi() function stored in memory. In myClass1 say_hi() function will create
+        it own instances of that function.
+        </dd>
 
         <dt>Add methods getter/setter methods (i.g. get_name(name), set_name()) to the classes and change say_hi() text to be "Hi, my name is %name%"!</dt>
-        <dd>[ your answer ]</dd>
+        <dd>
+        <xmp>
+        function MyClass2() {
+          var name;
+        
+          this.set_name = function(n) {
+            name = n;
+          };
+        
+          this.get_name = function() {
+            return name;
+          };
+        };
+
+        MyClass2.prototype.say_hi = function() {
+          console.log('Hi, my name is ' + this.get_name());
+        };
+        
+        function MyClass1() {
+          var name;
+        
+          this.set_name = function(n) {
+            name = n;
+          };
+        
+          this.get_name = function() {
+            return name;
+          };
+        
+          this.say_hi = function() {
+            console.log('Hi, my name is ' + this.get_name());
+          };
+        };
+
+        </xmp>  
+        </dd>
 
         <dt>Change class definition to implement the Singleton pattern</dt>
-        <dd>[ your answer ]</dd>
+        <dd>
+        <xmp>
+        var myClass3 = ( function() {
+            var name;
+            return {
+        
+              set_name : function(n) {
+                name = n;
+              },
+        
+              get_name : function() {
+                return name;
+              },
+        
+              say_hi : function() {
+                console.log('Hi, my name is ' + this.get_name());
+              }
+            };
+        }());
+
+        </xmp>
+        </dd>
     </dl>
 
     <hr/>
