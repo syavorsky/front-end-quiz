@@ -1,19 +1,63 @@
-function MyClass1 () {
-  this.say_hi = function() {
-    console.log('MyClass1 says HI!');
+function MyClass2() {
+  var name;
+
+  this.set_name = function(n) {
+    name = n;
   };
-}
 
-function MyClass2 () {}
-
-MyClass2.prototype.say_hi = function() {
-  console.log('MyClass2 says HI!');
+  this.get_name = function() {
+    return name;
+  };
 };
 
-var inst1 = new MyClass1(),
-    inst2 = new MyClass2();
+  MyClass2.prototype.say_hi = function() {
+    console.log('Hi, my name is ' + this.get_name());
+  };
 
-inst1.say_hi();
+function MyClass1() {
+  var name;
+
+  this.set_name = function(n) {
+    name = n;
+  };
+
+  this.get_name = function() {
+    return name;
+  };
+
+  this.say_hi = function() {
+    console.log('Hi, my name is ' + this.get_name());
+  };
+};
+
+var myClass3 = ( function() {
+    var name;
+    return {
+
+      set_name : function(n) {
+        name = n;
+      },
+
+      get_name : function() {
+        return name;
+      },
+
+      say_hi : function() {
+        console.log('Hi, my name is ' + this.get_name());
+      }
+    };
+}());
+
+var inst2 = new MyClass2()
+
+inst2.set_name("Robert 2");
+console.log(inst2.name);
+console.log(inst2.get_name());
 inst2.say_hi();
-  
- 
+
+
+ myClass3.set_name("Robert MyClass3");
+ console.log(myClass3.name);
+ console.log(myClass3.get_name());
+ myClass3.say_hi();
+

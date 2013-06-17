@@ -13,25 +13,137 @@
         <dt>Find left position of #d element relatively to the body element</dt>
         <dd>
     <xmp>
-    // your code
+  var getLeftPosition = function(el){
+      var posLeft = 0;
+  
+      function getParentOffset(el){
+          if(el.offsetParent && el.offsetParent.tagName.toLowerCase() != "body"){
+              posLeft += el.offsetLeft;
+              getParentOffset(el.offsetParent);
+          }   
+      };
+  
+      getParentOffset(el);
+      return posLeft;
+  };
+
     </xmp>
         </dd>
 
         <dt>Modify you code to do same calculation for any nesting level of the #d</dt>
         <dd>
     <xmp>
-    // your code
+  var getLeftPosition = function(el, elParent){
+      var posLeft = 0, isParent = false;
+      
+      function getParentOffset(el){
+          if(el.offsetParent){
+              posLeft +=el.offsetLeft;
+              if(el.offsetParent !== elParent && el.offsetParent.tagName.toLowerCase() != "body"){
+                  getParentOffset(el.offsetParent);
+              }
+          }   
+      };
+  
+      function checkParent(el){
+          var pNode = el.parentNode;
+          if(elParent === pNode){
+              isParent =  true;
+          }else{
+             if(pNode){
+                 checkParent(pNode);
+             }
+          }
+      };
+      
+      if(elParent){
+          checkParent(el);
+          if(!isParent){
+              alert('element is not child of parent');
+              return;
+          }
+      };
+      
+      getParentOffset(el);
+      return posLeft;
+  };
+      
     </xmp>
         </dd>
     </dl>
 
-    <div>
-        <div>
+    <div >
+        <div id="a">
             <div>
-                <div id="d">#d</div>
+                <div id="d">#d
+                    <div id="c">#c
+                        <div>
+                            <div id="e">#e</div>	
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+<script>
+(function(){
+
+  var getLeftPosition = function(el){
+      var posLeft = 0;
+  
+      function getParentOffset(el){
+          if(el.offsetParent && el.offsetParent.tagName.toLowerCase() != "body"){
+              posLeft += el.offsetLeft;
+              getParentOffset(el.offsetParent);
+          }   
+      };
+  
+      getParentOffset(el);
+      return posLeft;
+  };
+  
+  var getLeftPositionNew = function(el, elParent){
+      var posLeft = 0, isParent = false;
+      
+      function getParentOffset(el){
+          if(el.offsetParent){
+              posLeft +=el.offsetLeft;
+              if(el.offsetParent !== elParent && el.offsetParent.tagName.toLowerCase() != "body"){
+                  getParentOffset(el.offsetParent);
+              }
+          }   
+      };
+  
+      function checkParent(el){
+          var pNode = el.parentNode;
+          if(elParent === pNode){
+              isParent =  true;
+          }else{
+             if(pNode){
+                 checkParent(pNode);
+             }
+          }
+      };
+      
+      if(elParent){
+          checkParent(el);
+          if(!isParent){
+              console.log('error: element is not child of parent');
+              return;
+          }
+      };
+      
+      getParentOffset(el);
+      return posLeft;
+  };
+     
+  console.log("Left position of D from body = " + getLeftPosition(document.getElementById('d')) + "px");
+  console.log("Left position of C from D = " + getLeftPositionNew(document.getElementById('c'), document.getElementById('d'))+"px");
+  console.log("Left position of E from D = " + getLeftPositionNew(document.getElementById('e'), document.getElementById('d'))+"px");
+  console.log("Left position of A from D = " + getLeftPositionNew(document.getElementById('a'), document.getElementById('d')));
+}());   
+</script>
 
 </body>
 </html>

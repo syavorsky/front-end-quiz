@@ -1,1 +1,31 @@
-/* put your styles here */
+/* put your styles here 
+IE 7,8 dont support border-radius and background gradients, using modernizr to have fallback styles
+IE 9 does not support background gradients, using modernizr to have fallback styles
+ * */
+ul{background:#ffffff; font-size:0;width:100%;padding:5px;overflow: hidden}
+li{width:25%; display:block;float:left;font-size:16px; list-style-type: none}
+li a {
+  color:#000; 
+  text-decoration:none
+  height:20px; 
+  padding:9px 0; 
+  text-align:center;
+  border-radius:15px 0 15px 0;
+  border: 5px solid #EEE;
+  display:block;
+  background: -moz-linear-gradient(90deg, rgb(235, 235, 235) 10%, rgb(204, 204, 204)70%);
+  background: -webkit-linear-gradient(90deg, rgb(235, 235, 235) 10%, rgb(204, 204, 204) 70%);
+  background: -o-linear-gradient(90deg, rgb(235, 235, 235)10%, rgb(204, 204, 204) 70%);
+  background: -ms-linear-gradient(90deg, rgb(235, 235, 235) 10%, rgb(204, 204, 204) 70%);
+  background: linear-gradient(180deg,  rgb(235, 235, 235) 10%, rgb(204, 204, 204) 70%);
+  text-decoration: none
+}
+
+/*modernizr fallback styles*/
+.no-cssgradients li a {  
+background: #ccc; /* could use an image here but dont have photoshop to create background*/
+}
+
+.no-borderradius li a {  
+  border:none;
+}

@@ -16,7 +16,74 @@
             <img src="assets/mock.png" />
         </dt>
         <dd>
-            [ you answer ]
+<h2>Architecture</h2>
+<h3>Backend:</h3>
+<ul>
+     <li>Java Spring MVC Environment - Create rest endpoints</li>
+     <li> MySql Database - Create tables taskList, task and users</li>
+</ul>
+
+
+<h3>Front-end:</h3>
+<ul>
+    <li>HTML 5</li>
+    <li>Jquery</li>
+    <li>Ajax</li>
+    <li>CSS 3</li>
+    <li>JSON</li>
+</ul>
+
+ 
+<h3>Testing</h3>
+<ul>
+    <li>Junit - For backend rest endpoint testing</li>
+    <li>Front-end - unknown</li>
+</ul>
+
+<h3>Deployment:</h3>
+<ul>
+    <li>Maven Ant build tools</li>
+</ul>
+
+<h2>Backend System Design</h2>
+<p>Backend would need to have restend points for the front-end to get task data. The endpoint will return JSON data.</p>
+
+<h3>Rest End Point</h3>
+<h4>TaskList</h4>
+<ul>
+    <li>GET  /tasklists : returns all task list associated to the user</li>
+    <li>POST /tasklists : create a task list</li>
+    <li>DELETE /tasklists/--tasklist Id-- : deletes the taskList</li>
+</ul> 
+
+<h4>Tasks</h4>
+<ul>
+    <li>GET /tasks/--taskList ID-- : gets all task for task list</li>
+    <li>GET /tasks/--taskList ID--/--task ID-- : gets a task</li>
+    <li>POST /tasks/--taskList ID-- : creates a task in specified taskList</li>
+    <li>DELETE /tasks/--taskList ID--/--task id>-- : deletes a task</li>
+    <li>UPDATE /tasks/--taskList ID--/--task id-- - updates task, marked complete, edit name and description.</li>
+</ul>
+
+
+<h2>Front-end System</h2>
+<h3>Left Menu</h3>
+<p>The front-end will use the rest endpoints for all data interaction. On page load it should make an ajax call to the rest endpoint to get all task list. On the ajax callback it should create the left menu bar 
+with all the users task list.When the user clicks a specfic task list link in the left menu it will trigger an ajax call to get all task associated to that task list. This will then populate the right box with tasks.
+The "new Task List" link will display an overlay to input information to create a new task list. The "new task" link will also open an overlay to input information for a new task. There will be a submit button that will
+trigger an ajax call to either create a new task list or create a new task for a specified task list.
+</p>
+
+<h3>Task Content Area</h3>
+<p>The complete task link will trigger an ajax call to update the task.</p>
+
+<h2>Got to late and couldn't finish</h2>
+<h3>To Do List:</h3>
+<ul>
+    <li>Describe the JSON objects for the restend point request and responses</li>
+    <li>Describe the Data Model for the database</li>
+    <li>Go in more detail of the front end user interactions</li>
+</ul>
         </dd>
     </dl>
 </body>
