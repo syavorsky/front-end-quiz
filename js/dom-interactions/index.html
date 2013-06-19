@@ -14,26 +14,39 @@
         <dt>hide all even rows</dt>
         <dd>
     <xmp>
-    // your js code
+    // Hide all rows with the 'even' class
+    $('.even').hide();
     </xmp>
         </dd>
 
         <dt>do same assuming there are no class names</dt>
         <dd>
     <xmp>
-    // your js code
+    // Use 'odd' because indexes are 0-based   
+    $('li:odd').hide();
     </xmp>
         </dd>
         <dt>Build two arrays containing odd and even rows respectively.</dt>
         <dd>
     <xmp>
-    // your js code
+    // Even elements
+    var even = $('li:odd');
+    // Odd elements
+    var odd = $('li:even');
     </xmp>
         </dd>
         <dt>Rearrange nodes in reverse order</dt>
         <dd>
     <xmp>
     // your js code
+    var listItems = $('li');
+    for( var i = 0; i < listItems.length; i++ ) {
+        $('ul').prepend(listItems[i]);
+    }
+
+    // Alternatively
+    var listItems = $('li').get().reverse(); 
+    $('ul').html(listItems);
     </xmp>
         </dd>
     </dl>

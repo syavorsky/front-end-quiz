@@ -16,7 +16,50 @@
             <img src="assets/mock.png" />
         </dt>
         <dd>
-            [ you answer ]
+            <xmp>
+Pre-Development Assessment:
+    From what I can see in the mockups we have really two basic objects here: A 
+    todo list (which we can have many of), and a todo list item (which has a 
+    couple of properties).  A todo list has: 0 - many list items, a name. A todo
+    list item has: a name, completed (boolean).
+
+Languages:
+    Back-end can be written in (really) any language, so we'll go with PHP.
+    This back-end will be a RESTful API for our task app.  We communicate with 
+    JSON and use the standard CRUD commands for HTML (POST, GET, PUT, and 
+    DELETE - We'll skip PATCH for now).  Our PHP application runs on Apache (we 
+    could use nginx but it doesn't support DELETE or PUT natively).
+
+    Our backend stores data in a database, we'll go with mySQL due to its 
+    pervasiveness.  The database will have two tables: one for todo lists and 
+    one for todo list items.  todo lists will have a 0-to-many relationship with
+    the todo list items table.  
+
+    The front end will be a simple HTML/CSS interface and I would use 
+    CoffeeScript, Spine (or Backbone), and jQuery to do the user interaction and
+    communication with the PHP REST API.
+
+Testing:
+    Unit tests can be written for the front end via qUnit (unit testing library
+    I am most familiar with) or some other unit testing library.  We'll want to
+    write some tests for our backend too so we'll use PHPunit because the 
+    documentation looks solid and I've played with it a little bit.
+
+Deployment:
+    There are lots of different deploy strategies out there, so here's my take 
+    on the best option.  Our database will be configured once, ideally we will 
+    never have to touch it again unless we are making major changes to our 
+    application.  Code for both the front end and back end components can be 
+    deployed through the AWS beanstalk provided we are using Amazon for our 
+    hosting.  We can configure beanstalk to run unit and integration tests when 
+    it has new data pushed to then finally deploy the code and start the servers 
+    (if necessary).  This makes it possible for us to have a one-button deploy 
+    (well, one command).
+
+I'm sure there's substantially more that could be said about this simple 
+application but this is the basic pattern that I would use to build and deploy 
+such an application.
+            </xmp>
         </dd>
     </dl>
 </body>

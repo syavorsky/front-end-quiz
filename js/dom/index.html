@@ -13,14 +13,39 @@
         <dt>Find left position of #d element relatively to the body element</dt>
         <dd>
     <xmp>
-    // your code
+    // Get the element, the parent, and the offset   
+    var d       = document.getElementById('d'),
+        parent  = d.offsetParent,
+        offset  = d.offsetLeft;
+    // As long as the parent object exists keep going (The value of offsetParent on body is null)
+    while(parent) {
+        // As long as the offset is not a number, add it to the offset
+        if( !isNaN( parent.offsetLeft ) ) {
+            offset += parent.offsetLeft;
+        }
+        // Move to the next document element up from the current one
+        parent = parent.offsetParent;
+    }
+    console.log( offset );
     </xmp>
         </dd>
 
-        <dt>Modify you code to do same calculation for any nesting level of the #d</dt>
+        <dt>Modify your code to do same calculation for any nesting level of the #d</dt>
         <dd>
     <xmp>
-    // your code
+    // Recursive function to find the offset of an element
+    // @param elem The element to get the offset for
+    function findOffset(elem) {
+        if( elem.offsetParent ) {
+            // Add the current offset to the next element's offset
+            return elem.offsetLeft + findOffset( elem.offsetParent );
+        } else {
+            // When there is no next element, just return the current offset
+            return elem.offsetLeft;
+        }
+    }
+
+    console.log( findOffset( document.getElementById( 'd' ) ) );
     </xmp>
         </dd>
     </dl>

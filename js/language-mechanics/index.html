@@ -9,7 +9,7 @@
     <h1>JavaScript &gt; Language mechanics</h1>
     <dl class="qz-qa">
         <dt>Open the console. Explain the output: order, values, errors.</dt>
-        <dd>[ Your answer here ]</dd>
+        <dd>The order is what it is because for (1) console is called when the anonymous function runs (which is run immediately after it is parsed due to the invocation at the end of the declaration), (2) is called next as it is the next function call that is parsed after the anonymous function, (3) is next because the f1 function is called, and (4) never displays due to the scoping error. The values are because of scope.  In (1) both defined variable values are inside the scope of the console.log call.  In (2) v1 remains null because when the line var v1 = 'V-one' runs the definition of that variable and its value are within the scope of the anonymous function.  v2 is defined for the console log because inside the anonymous function the value is being set and the scope remains the same.  In (3) both values are defined because the function f1 exists within the scope of the anonymous function.  The error occurs because f2 is defined within the scope of the anonymous function and then called outside of said function's scope.</dd>
     </dl>
 
     <hr/>

@@ -14,21 +14,45 @@
 
     <dl class="qz-qa">
         <dt>
-            Explain in few sentences the difference between these 3 ways of binding event listeners.
+            Explain in a few sentences the difference between these 3 ways of binding event listeners.
         </dt>
-        <dd>[ your answer ]</dd>
+        <dd>The .live event listener listens for the event to propagate (bubble) all the way up to the window, The .delegate event listener listens for the event to propagate to the ul (with an id of 'items').  The .click event listener listens for the event to be fired on the element it is assigned to - The li element.</dd>
 
         <dt>
             Explain the order of output coming from handler.
         </dt>
-        <dd>[ your answer ]</dd>
+        <dd>The order is because of where the event listener lives - The click event is directly bound to the element so it gets fired first, the .delegate event listener is bound to the next element up so it is second, and the .live event listener binds all the way on the window so the event has to bubble all the way to the window object before the code is run. </dd>
 
         <dt>
             Replicate same functionality for all three cases using only native JS handling (addEventListener)
         </dt>
         <dd>
     <xmp>
-    // your code
+    // Live
+    window.addEventListener('click', function(e) {
+        // Match the tag names and the parent's id
+        if ( e.toElement.tagName === 'LI' && e.toElement.parentNode.id === 'items' ) {
+            console.log('(3) Assigned with native live sim()');
+        }
+    });
+    // Delegate - Add the listener to the element with the items id
+    document.getElementById('items').addEventListener('click', function(e) {
+        if ( e.toElement.tagName === 'LI' ) {
+            console.log('(2) Assigned with native delegate sim()');
+        }
+    });
+
+    // Add click events to each li element inside the ul
+    var children = document.getElementById('items').childNodes;
+    for ( var i = 0; i < children.length; i++ ) {
+        var child = children[i];
+        // Make sure we are matching only li nodes
+        if ( child.tagName !== undefined && child.tagName === 'LI' ) {
+            child.addEventListener('click', function() {
+                console.log('(1) Assigned with native click()');
+            });
+        }
+    }
     </xmp>
         </dd>
 
@@ -37,7 +61,20 @@
         </dt>
         <dd>
     <xmp>
-    // your code
+    // Live
+    $(window).on('click', '#items li', function() {
+        console.log('(3) Live - Assigned with jQuery .on()');
+    });
+
+    // Delegate
+    $('#items').on('click', 'li', function() {
+        console.log('(2) Delegate - Assigned with jQuery .on()');
+    });
+
+    // Click
+    $('#items li').on('click', function() {
+        console.log('(1) Click - Assigned with jQuery .on()');
+    });
     </xmp>
         </dd>
     </dl>
