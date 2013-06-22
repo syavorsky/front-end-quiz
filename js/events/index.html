@@ -16,19 +16,58 @@
         <dt>
             Explain in few sentences the difference between these 3 ways of binding event listeners.
         </dt>
-        <dd>[ your answer ]</dd>
+        <dd>
+            <p>I thought it was originally a shortcut to .live('click', eventHandler), but upon further research, it seems that functions attached via <code>.click()</code> method fire when the functions when the .click event is triggered.</p>
+
+            <p>Functions attached via the <code>.live</code> method are attached to the root document. The event is always available and listens to all events that happens to the document, only calling the eventhandler if it sees that whatever selector/event information it was told to filter to.</p>
+
+            <p>Event handlers attached via <code>.delegate</code> are added so that instead of listening to the entire document, it listens only to whatever happens to the root selector it was assigned to, firing the eventHandler when it sees the event happen to that specific selector.
+        </dd>
 
         <dt>
             Explain the order of output coming from handler.
         </dt>
-        <dd>[ your answer ]</dd>
+        <dd>
+            The handlers are fired due to event bubbling. Of all the actions that happen, the .click event happens first. The handlers assigned via .delegate are fired second because the event bubbles up to the #items div. The handlers assigned via .live is fired last because the document root is the last element the events bubble to.
+        </dd>
 
         <dt>
             Replicate same functionality for all three cases using only native JS handling (addEventListener)
         </dt>
         <dd>
+            I had trouble with this one since I wasn't sure how to register the .click and .live events differently.
     <xmp>
-    // your code
+
+        (function(){
+            var ele = document.getElementById('items');
+            var eleChildren = ele.getElementsByTagName('li');
+
+            // live
+            document.addEventListener('click',function(e){
+                for (var i = 0; i < eleChildren.length - 1; i++){            
+                    if(e.target == eleChildren[i]) {
+                        console.log('(3) Assigned with live()');
+                    }
+                }
+            });
+
+            // click -- not sure
+            for (var i = 0; i < eleChildren.length - 1; i++){
+                eleChildren[i].addEventListener("click",function(){
+                    console.log('(1) Assigned with click()');
+                });
+            }
+
+            // delegate
+            ele.addEventListener('click',function(e){
+                for (var i = 0; i < eleChildren.length - 1; i++){         
+                    if(e.target == eleChildren[i]) {
+                        console.log('(2) Assigned with delegate()');
+                    }
+                }
+            });
+        })();
+
     </xmp>
         </dd>
 
@@ -36,8 +75,26 @@
             Replicate same functionality for all three cases using only Prototype's Element.on()
         </dt>
         <dd>
+            <p>I had never used Prototype before, but upon reading the documentation and some (a lot of) Googling, below is my attempt:</p>
     <xmp>
-    // your code
+
+        // live
+        $(document).on("click", "#items li", function(){
+            console.log('(3) Assigned with live()');
+        });
+
+        // delegate
+        $('items').on("click", "li", function(){
+            console.log('(2) Assigned with delegate()');
+        });
+
+        // click
+        $$('#items li').each(function(element){
+            element.on("click", function(e){
+                console.log('(1) Assigned with click()');
+            });
+        });
+
     </xmp>
         </dd>
     </dl>
@@ -46,13 +103,13 @@
 
 <xmp>
 (function(){
-
+    
     $('#items li').live('click', function(){ console.log('(3) Assigned with live()'); });
-
+    
     $('#items').delegate('li', 'click', function() { console.log('(2) Assigned with delegate()'); });
-
+                                                 
     $('#items li').click(function(){ console.log('(1) Assigned with click()'); });
-
+                                      
 }(jQuery));
 </xmp>
 
@@ -62,6 +119,7 @@
         <li>Item 3. Click me</li>
     ​</ul>​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
 
+    <script src="http://ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js"></script>
     <script src="../../common-assets/jquery.1.7.2.js"></script>
     <script src="../../common-assets/modernizr.custom.26065.js"></script>
     <script src="assets/scripts.js"></script>

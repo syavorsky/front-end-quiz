@@ -14,26 +14,62 @@
         <dt>hide all even rows</dt>
         <dd>
     <xmp>
-    // your js code
+        // using jQuery; I have not worked with Prototype Js before.
+        $('.even').css({'display':'none'});
+        $('.even').addClass('hideme'); // where '.hideme' is a class with a CSS rule to set the display attribute to none (.hideme {display:none;})
+        $('.even').hide();
     </xmp>
         </dd>
-
         <dt>do same assuming there are no class names</dt>
         <dd>
     <xmp>
-    // your js code
+        // using jQuery
+        $('li:even').css({'display':'none'});
+        $('li:even').addClass('hideme'); // where '.hideme' is a class with a CSS rule to set the display attribute to none (.hideme {display:none;})
+        $('li:even').hide();
     </xmp>
         </dd>
         <dt>Build two arrays containing odd and even rows respectively.</dt>
         <dd>
     <xmp>
-    // your js code
+        /**
+         * Way 1
+         */
+        var oddArray = [];
+        var evenArray = [];
+        
+        $('.even').each(function(){
+            evenArray.push(this);
+        });
+
+        $('.odd').each(function(){
+            oddArray.push(this);
+        });
+
+
+        /**
+         * Way 2
+         */
+        var oddArray = [];
+        var evenArray = [];
+
+        function sortElements (element, arrayToBe){
+            element.each(function(){
+                arrayToBe.push(this);
+            });
+        }
+
+        sortElements($('.even'),evenArray);
+        sortElements($('.odd'),oddArray);
     </xmp>
         </dd>
         <dt>Rearrange nodes in reverse order</dt>
         <dd>
     <xmp>
-    // your js code
+        var parentNode = $('ul');
+        $('li').each(function(){
+            parentNode.prepend(this);
+        });
     </xmp>
         </dd>
     </dl>

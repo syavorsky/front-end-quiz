@@ -10,13 +10,101 @@
     <p>See scripts loaded on this page, check the console</p>
     <dl class="qz-qa">
         <dt>Is there any difference between these two class definitions</dt>
-        <dd>[ your answer ]</dd>
+        <dd>
+            Yes. The say_hi method is a regular method inside the MyClass1 and is simply an instance of the method in the object, while MyClass2.say_hi is defined the object's prototype. Methods attached via the object .prototype is shared for all instances of that object.
+        </dd>
 
         <dt>Add methods getter/setter methods (i.g. get_name(name), set_name()) to the classes and change say_hi() text to be "Hi, my name is %name%"!</dt>
-        <dd>[ your answer ]</dd>
+        <dd>
+        <xmp>
+          <script type="text/javascript">
+        /**
+         * MyClass1
+         */
+        function MyClass1 (name) {
+          var nameVal = '';
+
+          this.set_name = function(name){
+            nameVal = name;
+          }
+
+          this.get_name = function() {
+            return nameVal;
+          }
+
+          this.say_hi = function() {
+            console.log('Hi, my name is ' + this.get_name());
+          };
+        }
+
+        /**
+         * MyClass2
+         */
+        function MyClass2 () {}
+
+        MyClass2.prototype.say_hi = function() {
+          console.log('Hi, my name is ' + this.get_name());
+        };
+
+        MyClass2.prototype.set_name = function(name){
+            nameVal = name;
+          }
+
+        MyClass2.prototype.get_name = function() {
+            return nameVal;
+        }
+
+        /**
+         * Calls
+         */
+        var inst1 = new MyClass1(),
+            inst2 = new MyClass2();
+
+        inst1.set_name('Woobie');
+        inst1.say_hi();
+
+        inst2.set_name('Rick');
+        inst2.say_hi();
+        </script>
+        </xmp>
+        </dd>
 
         <dt>Change class definition to implement the Singleton pattern</dt>
-        <dd>[ your answer ]</dd>
+        <dd>
+          I had to look this one up as I wasn't familiar with the Singleton pattern. From what I understand, it's a piece of code that will let you use the same instance of the code, all the time and that it relies on the principle it's useful only when exactly one object is needed to coordinate actions across the system (like for database connections/interactions).
+          <xmp>
+            var singletonClass = (function(){
+              var nameVal = '';
+
+              function set_name(name) {
+                nameVal = name;
+              }
+
+              function get_name(){
+                return nameVal;
+              }
+
+              function say_hi(){
+                console.log('Hi, my name is ' + get_name());
+              }
+
+              return {
+                set_name : function(name){
+                  set_name(name);
+                },
+                say_hi : function(){
+                  say_hi();
+                }
+              }
+            })();
+
+            /**
+             * To call
+             */
+            singletonClass.set_name('Womp womp');
+            singletonClass.say_hi();
+          </xmp>
+        </dd>
     </dl>
 
     <hr/>

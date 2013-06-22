@@ -1,1 +1,35 @@
-/* put your styles here */
+/* ul adding white background to make borders more evident */
+ul {display:block;min-width:660px;height:44px;}
+
+/* option1 - repeated for all options below so we make these global changes */
+li {
+	display:block;height:36px;width:153px;
+	float:left;background:#ccc;}
+li a {
+	display:block;width:100%;padding-top:10px;
+	height:24px;text-decoration:none;color:#000;
+	text-align:center;}
+li a:hover {text-decoration:underline;}
+
+
+/* only need to add class  */
+.option2 li {
+	overflow:hidden;
+	border-top-left-radius:10px;
+	border-bottom-right-radius:10px;
+	text-shadow:1px 1px 0 #fff;
+}
+
+/* requires rules in option 2 to work */
+.option3 li {
+	background: #eeeeee;
+	background-image: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#cccccc));
+	background-image: -webkit-linear-gradient(top, #eeeeee 0%,#cccccc 100%);
+	background-image: -o-linear-gradient(top, #eeeeee 0%,#cccccc 100%);
+	background-image: -ms-linear-gradient(top, #eeeeee 0%,#cccccc 100%);
+	background-image: linear-gradient(to bottom, #eeeeee 0%,#cccccc 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=0 );
+	border:4px solid #eee;
+}
+.option3 li a {background:transparent url(arrow.gif) 104px 13px no-repeat;}}

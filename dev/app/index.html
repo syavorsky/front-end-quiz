@@ -16,7 +16,22 @@
             <img src="assets/mock.png" />
         </dt>
         <dd>
-            [ you answer ]
+        <p>Each task list would be an array that holds objects that represent tasks and each tasks has properties like name, and status (complete or incomplete). Because of this, I would want the data stored as objects.</p>
+
+        <p>Then we would need to be able to create tasks. We would want to bind the 'new Task List' link to something that loads an input field that asks us to name the field. Then we would hit 'save' to create the task list or 'cancel' to cancel the task list creation process and bring us back to the page of tasks. This would all be done in HTML/CSS and JavaScript, and if I had the time to experiment, I would try to build the TODO app in AngularJS because the short code required to implement data-binding would make it a good choice to make for cleaner code.</p>
+
+        <p>ULs that contain the list of tasks will have a default CSS rule of "display:none" so it is hidden. However, we will want to add an 'active' class to the first task list because when the user lands on the page, the task list column on the left would display the tasks belonging to first task list available.</p>
+
+        <p>To display a different task list on the right column, users clicking on the task list name on the left column will trigger an event that removes the active class from the uls in the right column, and appends it again to the ul that corresponds to the task list clicked on the left column</p>
+
+        <p>Users would be able to add tasks by clicking the 'new Task' link where users are able to input the task name. Users would also have a select menu where the default option was the last/current task viewed. Other options for that select menu would be other tasks that have already been created.</p>
+
+        <p>The 'complete' link to the right of each task would call a function that changed that task's status property to 'complete'. Tasks with 'complete' properties would be styled with a line-through</p>
+
+        <p>I don't have any familiarity with writing tests beyond procedular coding. As for testing environment, since the code is in HTML/CSS and JavaScript, everything should run without a special server/virtual machine.</p>
+
+        <p>In my current position, deployment would consist of me building the app and troubleshooting any errors I find on my test server, then it would go to our staging server for QA to test. It would then either go back to me for fixes if any bugs/errors were found, or over to our deployment crew to go to production if the app was fine. However, if I were to build this app at home, I would be informally testing, troubleshooting and deploying.</p>
+
         </dd>
     </dl>
 </body>
