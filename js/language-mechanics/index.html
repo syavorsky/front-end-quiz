@@ -9,7 +9,17 @@
     <h1>JavaScript &gt; Language mechanics</h1>
     <dl class="qz-qa">
         <dt>Open the console. Explain the output: order, values, errors.</dt>
-        <dd>[ Your answer here ]</dd>
+        <dd>
+            <p><code>(1): V-one V-two</code> displays as the first line in the console because <code>console.log('(1):', v1, v2);</code> is in the immediate-invoked function expression (IIFE). The value of <code>v1</code> is <code>V-one</code> because the local variable <code>v1</code> is set to <code>V-one</code>. The value of <code>v2</code> is <code>V-two</code> because it is redefined so in the IIFE.</p>
+
+            <p><code>(2): null V-two</code> displays afterward, because <code>console.log('(2):', v1, v2);</code> is called the after IIFE invoked. <code>null</code> displays as the value of <code>v1</code> because v1 was initalized globaly as <code>null</code>. It was defined locally in the IIFE, so the global variable keeps its value. Only functions using v1 inside the IIFE would translate v1's value to V-one. The reason v2 still printed out V-two is because , whereas v1 was re-initialized in the IIFE, v2's value was simply re-assigned. Since the v2 var was defined globally in the first place, it retained the new assignment.
+            </p>
+
+            <p><code>(3): V-one V-two </code> displays as the third line in the console because the <code>f1()</code> is called after <code>(2): null V-two</code>. <code>v1</code>'s value is <code>V-one</code> because it's looking at the <code>v1</code> variable defined in the IIFE and <code>v2</code> shows up as <code>V-two</code> because it was redefined as such, also in the IIFE.</p>
+
+            <p>The last console.log line I have is an error <code>ReferenceError: f2 is not defined</code>. The <code>f2()</code> function is not defined because it was defined as a local variable in the IIFE. f1(), however, was put in the global namespace.
+            </p>
+        </dd>
     </dl>
 
     <hr/>
