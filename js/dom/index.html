@@ -13,15 +13,28 @@
         <dt>Find left position of #d element relatively to the body element</dt>
         <dd>
     <xmp>
-    // your code
+    <script>
+	var elem = document.getElementById('d');
+	var left = elem.offsetLeft + 
+			elem.offsetParent.offsetLeft + 
+			elem.offsetParent.offsetParent.offsetLeft +
+			elem.offsetParent.offsetParent.offsetParent.offsetLeft;
+    </script>
     </xmp>
         </dd>
 
         <dt>Modify you code to do same calculation for any nesting level of the #d</dt>
         <dd>
     <xmp>
-    // your code
-    </xmp>
+    <script>
+        var elem = document.getElementById('d');
+        var left = 0;
+        while( document.body !== elem ) {
+            left += elem.offsetLeft;
+            elem = elem.offsetParent;
+        }
+    </script>
+   </xmp>
         </dd>
     </dl>
 
@@ -32,6 +45,5 @@
             </div>
         </div>
     </div>
-
 </body>
 </html>

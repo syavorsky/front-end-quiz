@@ -14,26 +14,72 @@
         <dt>hide all even rows</dt>
         <dd>
     <xmp>
-    // your js code
+	<script>
+		$(".even").css("display","none");
+	</script>
     </xmp>
         </dd>
 
         <dt>do same assuming there are no class names</dt>
         <dd>
     <xmp>
-    // your js code
+	<script>
+		var hide = false;
+		$("li").each(function() {
+			if (hide) {
+				$(this).css("display","none");
+				hide = false;
+			} else {
+				hide = true;
+			}
+		});			
+	</script>
     </xmp>
         </dd>
         <dt>Build two arrays containing odd and even rows respectively.</dt>
         <dd>
     <xmp>
-    // your js code
+	<script>
+		var odd = true;
+		var i_odd = 0;
+		var i_even = 0;
+		var odds = new Array();
+		var evens = new Array();
+		
+		$("li").each(function() {
+			if (odd) {
+				odds[i_odd++] = $(this).html();
+				odd = false;
+			} else {
+				evens[i_even++] = $(this).html();
+				odd = true;
+			}
+		});		
+	</script>
     </xmp>
         </dd>
         <dt>Rearrange nodes in reverse order</dt>
         <dd>
     <xmp>
-    // your js code
+	<script>
+		var prev = null;		
+		$("li").each(function() {
+			if (prev != null) {
+				$(this).insertBefore(prev);
+				prev = $(this);
+			} else {
+				prev = $(this);
+			}
+		});	
+	</script>
+
+OR
+	<script>
+		$("li").each(function() { 
+			$(this).prependTo($("ul"));
+		});	
+	</script>
+
     </xmp>
         </dd>
     </dl>

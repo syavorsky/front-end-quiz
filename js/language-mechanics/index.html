@@ -9,8 +9,17 @@
     <h1>JavaScript &gt; Language mechanics</h1>
     <dl class="qz-qa">
         <dt>Open the console. Explain the output: order, values, errors.</dt>
-        <dd>[ Your answer here ]</dd>
-    </dl>
+        <dd>Order:
+		The (1) log is printed first since the defined anonymous function is defined then called.  
+        <br>The (2) log is printed second since its console.log call is immediately after the anonymous function.
+        <br>The (3) log is printed next as the function in which it is defined is called next.
+        <br>The (4) log is never printed as its function is not in scope when called as it was defined as a local function to the anonymous function.
+        <br>Values:
+		<br>In (1) v1 and v2 have the values as set within the anonymous function.
+		<br>In (2) v1 has the value as defined previous to the anonymous function because the v1 within the function is local to the function and therefore doesn't affect the previous definition. v2 has the value as defined in the anonymous function because there is no 'var' in front of it indicating that it is not a local declaration.
+		<br>In (3) v1 and v2 also have the values as set with the anonymous function because function f1 retains the context of the anonymous function
+		<br>Error: The call to f2 errors because function f2 was defined with 'var' in front of it, making it local to its parent function.</dd>
+ </dl>
 
     <hr/>
     

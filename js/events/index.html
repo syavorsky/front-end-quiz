@@ -16,19 +16,41 @@
         <dt>
             Explain in few sentences the difference between these 3 ways of binding event listeners.
         </dt>
-        <dd>[ your answer ]</dd>
-
+        <dd>You can bind with .live before an element exists.  So if your matching element set may not exist yet, or the set may change, .live should be used.
+		If you have a common parent of your element set that will never change, you should bind with .delegate on the common parent.
+		Binding with .click binds directly to the element.  If the element gets removed or replaced, the event listener is destroyed.</dd>
         <dt>
             Explain the order of output coming from handler.
         </dt>
-        <dd>[ your answer ]</dd>
+        <dd>The .click event happens first, since it is directly bound to the elements.  
+		The .delegate happens second because the event then bubbles up the parent elements heirarchy.  
+		The .live event happens last because it happens after bubbling the event all the way up. </dd>
 
         <dt>
             Replicate same functionality for all three cases using only native JS handling (addEventListener)
         </dt>
         <dd>
     <xmp>
-    // your code
+	LIVE BINDING
+		document.addEventListener("click", function (event) {
+			if (event.target.tagName == "LI" && event.target.parentNode.id == "items") {
+				console.log('(3) My live handler');
+			}
+		});		
+	
+	DELEGATE BINDING
+		document.getElementById("items").addEventListener("click", function(event) { 
+			if (event.target.tagName == "LI") {
+				console.log('(2) My delegate handler'); 
+			}
+		});
+
+	CLICK BINDING
+		var liElements = document.getElementById("items").getElementsByTagName("li");
+		for (var i = 0; i < liElements.length; ++i) {
+			liElements[i].addEventListener("click", function(){ console.log('(1) My click handler'); });
+		}
+		
     </xmp>
         </dd>
 
@@ -37,7 +59,15 @@
         </dt>
         <dd>
     <xmp>
-    // your code
+	LIVE BINDING
+		$(document).on("click", "li", function(){ console.log('(3) My live handler') });
+	
+	DELEGATE BINDING
+		$('#items').on("click", "li", function(){ console.log('(2) My delegate handler') });
+
+	CLICK BINDING
+		$('#items li').on("click", function(){ console.log('(1) My click handler') });
+		
     </xmp>
         </dd>
     </dl>
