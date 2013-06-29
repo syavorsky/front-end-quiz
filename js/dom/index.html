@@ -10,17 +10,48 @@
     <h1>JavaScript &gt; DOM</h1>
     Assume you have only native JS functions available.
     <dl class="qz-qa">
-        <dt>Find left position of #d element relatively to the body element</dt>
+        <dt>Find left position of #d element relative to the body element</dt>
         <dd>
     <xmp>
-    // your code
+    (function(targetElementId){
+        var leftPosition = -1;
+        var element = document.getElementById(targetElementId);
+        if (element instanceof HTMLElement) {
+            leftPosition = element.getBoundingClientRect().left;
+        }
+        console.log(leftPosition);
+        return leftPosition;
+    }('d'));
     </xmp>
         </dd>
 
-        <dt>Modify you code to do same calculation for any nesting level of the #d</dt>
+        <dt>Modify your code to do the same calculation for any nesting level of the #d</dt>
         <dd>
     <xmp>
-    // your code
+    (function(targetElementId, nestingLevel){
+        var findLeftPosition = function (element) {
+            var leftPosition = -1;
+            if (element instanceof HTMLElement) {
+                leftPosition = element.getBoundingClientRect().left;
+            }
+            return leftPosition;
+        };
+
+        var findLeftPositionOfNestingLevel = function(targetElement, nestingLevel){
+            var element = targetElement;
+            var currentNestLevel = 0;
+            while (element instanceof HTMLElement && currentNestLevel < nestingLevel) {
+                element = element.parentElement;
+                currentNestLevel++;
+            }
+            return findLeftPosition(element);
+        };
+
+        var targetElement = document.getElementById(targetElementId);
+        var leftPosition = findLeftPositionOfNestingLevel(targetElement, nestingLevel);
+        console.log(leftPosition);
+        return leftPosition;
+    }('d', 3));
     </xmp>
         </dd>
     </dl>

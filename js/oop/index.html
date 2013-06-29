@@ -10,13 +10,63 @@
     <p>See scripts loaded on this page, check the console</p>
     <dl class="qz-qa">
         <dt>Is there any difference between these two class definitions</dt>
-        <dd>[ your answer ]</dd>
+        <dd>say_hi will be duplicated with every new instance of MyClass1.</dd>
 
-        <dt>Add methods getter/setter methods (i.g. get_name(name), set_name()) to the classes and change say_hi() text to be "Hi, my name is %name%"!</dt>
-        <dd>[ your answer ]</dd>
+        <dt>Add methods getter/setter methods (i.g. get_name(), set_name(name)) to the classes and change say_hi() text to be "Hi, my name is %name%"!</dt>
+        <dd><xmp>
+            function MyClass1 () {
+                this.name = "Unknown";
+                this.say_hi = function() {
+                    console.log("Hi, my name is " + this.name);
+                };
+                this.set_name = function(name) {
+                    this.name = name;
+                };
+                this.get_name = function() {
+                    return this.name;
+                };
+            }
+
+            function MyClass2 () {}
+            MyClass2.prototype.name = "Unknown";
+            MyClass2.prototype.say_hi = function() {
+                console.log("Hi, my name is " + this.name);
+            };
+            MyClass2.prototype.get_name = function() {
+                return this.name;
+            };
+            MyClass2.prototype.set_name = function(name) {
+                this.name = name;
+            };
+
+            var inst1 = new MyClass1(),
+                inst2 = new MyClass2();
+
+            inst1.say_hi();
+            inst2.set_name("Patrick");
+            inst2.say_hi();
+        </xmp></dd>
 
         <dt>Change class definition to implement the Singleton pattern</dt>
-        <dd>[ your answer ]</dd>
+        <dd><xmp>
+            var MyClass2 = {
+                name: "Unknown",
+                say_hi: function() {
+                    console.log("Hi, my name is " + this.name);
+                },
+                get_name: function() {
+                    return this.name;
+                },
+                set_name: function(name) {
+                    this.name = name;
+                }
+            }
+
+            inst2 = MyClass2;
+
+            inst2.set_name("Patrick");
+            inst2.say_hi();
+        </xmp></dd>
     </dl>
 
     <hr/>
