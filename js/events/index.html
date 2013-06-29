@@ -16,19 +16,53 @@
         <dt>
             Explain in few sentences the difference between these 3 ways of binding event listeners.
         </dt>
-        <dd>[ your answer ]</dd>
+        <dd>Live binds a function, a css selector, and an event name to the document -- executing the function when an event and source matches both the css selector and the event name. Delegate is similar to live, but it binds to elements matched by the css selector instead of the document. Click binds a function directly to elements matched and is triggered by their 'click' event.</dd>
 
         <dt>
             Explain the order of output coming from handler.
         </dt>
-        <dd>[ your answer ]</dd>
+        <dd>Click binds a function directly to the items matched by '#items li', before the click event bubbles up the dom. Delegate binds to '#items' and intercepts the event before it bubbles up to document. Live is the last because it is listening at the highest possible point, the document.</dd>
 
         <dt>
             Replicate same functionality for all three cases using only native JS handling (addEventListener)
         </dt>
         <dd>
     <xmp>
-    // your code
+        // Click
+        (function(elementArray, eventType, func){
+            for (element in elementArray) {
+                elementArray[element].addEventListener(eventType, func);
+            }
+        }($('#items li').get(), "click", function(event){console.log(event);}));
+
+        // Delegate
+        (function(bindArray, selector, eventType, func){
+
+            var eventListener = function (selector, func, event) {
+                if (event.toElement.localName === selector) {
+                    func(event);
+                }
+            };
+
+            for (element in bindArray) {
+                bindArray[element].addEventListener(eventType, $.proxy(eventListener, this, selector, func));
+            }
+
+        }($('#items').get(), 'li', 'click', function(event){console.log(event);}));
+
+        // Live
+        (function(selector, eventType, func){
+
+            var eventListener = function (selector, func, event) {
+                if ($(selector).get().indexOf(eventBody.toElement) >= 0){
+                    func(event);
+                }
+            };
+
+            document.addEventListener(eventType, $.proxy(eventListener, this, selector, func));
+
+        }('#items li', 'click', function(event){console.log(event);}));
+
     </xmp>
         </dd>
 
@@ -37,7 +71,15 @@
         </dt>
         <dd>
     <xmp>
-    // your code
+    // Click
+    $$('#items li').each(function(item){item.on("click", function(event){console.log(event);})});
+
+    // Delegate
+    $('items').on("click", 'li', function(event) {console.log(event);});
+
+    // Live
+    $(document).on("click", '#items li', function(event){console.log(event);});
+
     </xmp>
         </dd>
     </dl>

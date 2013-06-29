@@ -9,7 +9,14 @@
     <h1>JavaScript &gt; Language mechanics</h1>
     <dl class="qz-qa">
         <dt>Open the console. Explain the output: order, values, errors.</dt>
-        <dd>[ Your answer here ]</dd>
+        <dd>
+            <div>
+                (1) displays first, when the anonymous function executes with v1 scoped to the anonymous function and v2 scoped globally.<br>
+                After the anonymous method is parsed, (2) executes in global scope with a nulled v1 and 'V-two' v2.<br>
+                The function f1 is visible in the global scope, but it executes scoped within the anonymous function, pulling the local v1 and global v2.<br>
+                The function call for f2 is only visible within the anonymous function, unavailable from the global scope where f2 is called.
+            </div>
+        </dd>
     </dl>
 
     <hr/>
