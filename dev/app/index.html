@@ -16,7 +16,20 @@
             <img src="assets/mock.png" />
         </dt>
         <dd>
-            [ you answer ]
+        I would use the following frameworks/libraries/services: AngularJS, Ruby on Rails, Heroku, PostgreSQL. I'd use SQLite if this
+        stayed small (and to keep it really simple), but unfortunately Heroku doesn't like it and if this is going to be web accessible and
+        I'll need to deploy, I'm going to opt for Heroku's one-click deploy and just set up the db properly.<br>
+        <br>
+        Using Angular, I'd use their resource library to integrate with a REST API I'd build in Rails. Rails would pretty much only be there
+        for serving JSON. Because it's done in Angular, I might want to use some of their templating to display different views (add new task list might
+        load up a <em>different</em> page). I can use a TemplateController or something to serve those files, but really if I wanted to keep it simple,
+        I would just make this truly a single page app and do everything inline.<br>
+        <br>
+        Deployment is simple with Heroku. I might set up a staging server to deploy to first just for a quick sanity check before deploying
+        to production, but that might be overkill for an app of this size.<br>
+        <br>
+        Testing is built into Rails so I'd just use that to ensure my JSON is working properly. Because of the way AngularJS works, it plays nicely
+        with unit testing frameworks like Jasmine, so I'd probably just use that.
         </dd>
     </dl>
 </body>

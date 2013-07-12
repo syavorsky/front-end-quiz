@@ -10,13 +10,62 @@
     <p>See scripts loaded on this page, check the console</p>
     <dl class="qz-qa">
         <dt>Is there any difference between these two class definitions</dt>
-        <dd>[ your answer ]</dd>
+        <dd>Sort of. In a Class1 instance, the say_hi method is defined in the constructor whereas in a Class2 instance they're inherited.</dd>
 
         <dt>Add methods getter/setter methods (i.g. get_name(name), set_name()) to the classes and change say_hi() text to be "Hi, my name is %name%"!</dt>
-        <dd>[ your answer ]</dd>
+        <dd>
+        <xmp>
+function MyClass1 () {
+  this.name = null;
+
+  this.say_hi = function() {
+    console.log('Hi, my name is ' + this.get_name());
+  };
+  this.get_name = function() {
+    return this.name;
+  };
+  this.set_name = function(name) {
+    this.name = name;
+  };
+}
+
+function MyClass2 () {
+  this.name = null;
+}
+
+MyClass2.prototype.say_hi = function() {
+  console.log('Hi, my name is ' + this.get_name());
+};
+
+MyClass2.prototype.get_name = function() {
+  return this.name;
+}
+
+MyClass2.prototype.set_name = function(name) {
+  this.name = name;
+}
+        </xmp>
+        </dd>
 
         <dt>Change class definition to implement the Singleton pattern</dt>
-        <dd>[ your answer ]</dd>
+        <dd>
+        <xmp>
+        var MyClass = (function() {
+          return {
+            name: null,
+            set_name: function(name) {
+              this.name = name;
+            },
+            get_name: function() {
+              return this.name;
+            },
+            say_hi: function() {
+              console.log("Hi, my name is " + this.get_name());
+            }
+          };
+        })();
+        </xmp>
+        </dd>
     </dl>
 
     <hr/>

@@ -21,9 +21,19 @@
         <dd>Add some implementation notes, describe possible crossbrowser issues.</dd>
 
         <img src="assets/mock.png" />
+
+        <br><br>Some notes:
+        <ul>
+          <li>I intentionally did not match the border color, because the background color of this page blended too closely to it.</li>
+          <li>The :after content in the menu items do not have a text-shadow, but the links do.</li>
+          <li>The clickable area of all links are the entire width and height of the menu items (not just the text)</li>
+          <li>The arrow is unicode, inserted using CSS. I thought about creating a CSS arrow to insert, but it felt like cheating (as it would require additional markup</li>
+        </ul>
+        <br><br>I haven't implemented it here, but to get this working in IE6-9, we could install CSS3PIE. This should work in Chrome, Firefox, Safari, Opera, and newer versions of IE without a problem though.
+        <br><br>For convenience, <a href="assets/styles.css">link to the stylesheet</a>
     </dl>
 
-    <ul>
+    <ul id="a">
         <li><a href="#">Link 1</a></li>
         <li><a href="#">Link 2</a></li>
         <li><a href="#">Link 3</a></li>

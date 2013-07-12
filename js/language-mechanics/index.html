@@ -9,7 +9,21 @@
     <h1>JavaScript &gt; Language mechanics</h1>
     <dl class="qz-qa">
         <dt>Open the console. Explain the output: order, values, errors.</dt>
-        <dd>[ Your answer here ]</dd>
+        <dd>The first console.log occurs at the end of the first self executing function.
+        In the self-executing function, a new variable available only in this function's scope
+        is declared with a value of "V-one". The global v2 is then set to "V-two". 
+        When the first line is logged, those values are used.<br>
+        <br>
+        In line 2, because the global v1 was never used (declared var v1 inside function is not
+        the same) the value is null. v2 is still "V-two", because the global variable was defined inside
+        the self-executing function and the data does not change after the function has executed.<br>
+        <br>
+        In line 3, because f1 does not have a "var", it is considered global and therefore accessible in
+        global scope. However, because it exists inside the self-executing function it has access the variables
+        within that scope. Its "v1" is the v1 that exists inside the self-executing function and its v2 is global.<br>
+        <br>
+        Line 4 is never output, because the function is declared inside the self-executing function
+        and therefore inaccessible in the global scope.</dd>
     </dl>
 
     <hr/>
