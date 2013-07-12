@@ -20,7 +20,24 @@
         <dt>Modify you code to do same calculation for any nesting level of the #d</dt>
         <dd>
     <xmp>
-    // your code
+    // I ended up writing code for any level. I had a little bit of trouble remembering how to get left positions
+    // using JavaScript and assumed there would be an easy way to just grab its position on screen, but the
+    // relative positioning of the parents made it return the CSS left value so it only made sense to loop upwards
+    // and add offsets. I did a quick google to see if there was an easier way to do this, but nothing really turned up.
+
+    // It should also be noted that this function makes the assumption that the body is the root element of the page.
+
+    function getLeftPosition(el) {
+      var offset = 0;
+      while(el != null) {
+        offset += el.offsetLeft;
+        el = el.offsetParent; 
+      }
+      return offset;
+    }
+
+    var d = document.getElementById("d");
+    console.log(getLeftPosition(d)); // offset comes out to 115
     </xmp>
         </dd>
     </dl>

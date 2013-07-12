@@ -16,19 +16,87 @@
         <dt>
             Explain in few sentences the difference between these 3 ways of binding event listeners.
         </dt>
-        <dd>[ your answer ]</dd>
+        <dd>
+          <br>
+          (1) $("#items li").click() - listens for clicks on all items that match "#items li" only when the document loads.<br>
+          (2) $("#items li").live("click") - constantly checks for clicks for items that match "#items li" even after the document loads.<br>
+          (2) $("#items").delegate("li", "click") - constantly checks for clicks for items within "#items" that match "li" when and after the document loads.<br>
+        </dd>
 
         <dt>
             Explain the order of output coming from handler.
         </dt>
-        <dd>[ your answer ]</dd>
+        <dd>Click comes first, because the event is triggered at the element. Delegate comes next, because the event moves up through the DOM and is
+        heard by the "#items" element. Live comes last, because jQuery.live is attached to the document element (where the event moves to last).</dd>
 
         <dt>
             Replicate same functionality for all three cases using only native JS handling (addEventListener)
         </dt>
         <dd>
     <xmp>
-    // your code
+    // There were a couple things I had to look up for this exercise. Namely querySelectorAll
+    // was something I was not terribly familiar with (as it was always convenienced for me with jQuery's $ function).
+    // Thankfully, it wasn't hard to figure out.
+
+    // Next, I had never used prototype before (nor have I really seen much of it) so I had to look up
+    // their documentation as well.
+
+    function inArray(needle, haystack) {
+      for (var i = 0, len = haystack.length; i < len; i++) {
+        if (haystack[i] == needle) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+
+    // click
+    function click(el, callback) {
+      var elements = document.querySelectorAll(el);
+
+      for (var i = 0, len = elements.length; i < len; i++) {
+        elements[i].addEventListener("click", function() {
+          callback();
+        });
+      }
+    }
+
+    // live
+    function live(el, event, callback) {
+      document.addEventListener(event, function(e) {
+        if (inArray(e.target, document.querySelectorAll(el))) {
+          callback();
+        }
+      });
+    }
+
+    // delegate
+    function delegate(container, el, event, callback) {
+      var elements = document.querySelectorAll(container);
+
+      for (var i = 0, len = elements.length; i < len; i++) {
+        var curElement = elements[i];
+        curElement.addEventListener(event, function(e) {
+          if (inArray(e.target, curElement.querySelectorAll(el))) {
+            callback();
+          }
+        });
+      }
+    }
+
+
+    // actual code to call
+    click("#items li", function() {
+      console.log("new (1) Assigned with click()");
+    });
+    delegate("#items", "li", "click", function() {
+      console.log("new (2) Assigned with delegate()");
+    });
+    live("#items li", "click", function() {
+      console.log("new (3) Assigned with live()");
+    });
+
     </xmp>
         </dd>
 
@@ -37,7 +105,59 @@
         </dt>
         <dd>
     <xmp>
-    // your code
+      function inArray(needle, haystack) {
+        for (var i = 0, len = haystack.length; i < len; i++) {
+          if (haystack[i] == needle) {
+            return true;
+          }
+        }
+
+        return false;
+      }
+
+      // click
+      function click(el, callback) {
+        var elements = document.querySelectorAll(el);
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          Element.on(elements[i], "click", function(e) {
+            callback();
+          });
+        }
+      }
+
+      // live
+      function live(el, event, callback) {
+        Element.on(document, event, function(e) {
+          if (inArray(e.target, document.querySelectorAll(el))) {
+            callback();
+          }
+        });
+      }
+
+      // delegate
+      function delegate(container, el, event, callback) {
+        var elements = document.querySelectorAll(container);
+
+        for (var i = 0, len = elements.length; i < len; i++) {
+          var curElement = elements[i];
+          Element.on(curElement, event, function(e) {
+            if (inArray(e.target, curElement.querySelectorAll(el))) {
+              callback();
+            }
+          });
+        }
+      }
+
+      click("#items li", function() {
+        console.log("prototype (1) Assigned with click()");
+      });
+      delegate("#items", "li", "click", function() {
+        console.log("prototype (2) Assigned with delegate()");
+      });
+      live("#items li", "click", function() {
+        console.log("prototype(3) Assigned with live()");
+      });
     </xmp>
         </dd>
     </dl>
@@ -56,14 +176,16 @@
 }(jQuery));
 </xmp>
 
+    <a href='javascript:var li=document.createElement("li");li.innerHTML="hi";document.getElementById("items").appendChild(li);'>Add list item to test live/delegate</a>
     <ul id="items">
         <li>Item 1. Click me</li>
         <li>Item 2. Click me</li>
         <li>Item 3. Click me</li>
-    ​</ul>​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+    </ul>
 
-    <script src="../../common-assets/jquery.1.7.2.js"></script>
+  <!--<script src="../../common-assets/jquery.1.7.2.js"></script>-->
+  <script src="http://ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js"></script>
     <script src="../../common-assets/modernizr.custom.26065.js"></script>
-    <script src="assets/scripts.js"></script>
+    <!--<script src="assets/scripts.js"></script>-->
 </body>
 </html>

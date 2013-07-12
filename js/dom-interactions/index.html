@@ -14,26 +14,46 @@
         <dt>hide all even rows</dt>
         <dd>
     <xmp>
-    // your js code
+    $(".even").hide();
     </xmp>
         </dd>
 
         <dt>do same assuming there are no class names</dt>
         <dd>
     <xmp>
-    // your js code
+    $("ul > li.nth-child(even)").hide();
+
+    // I've created a test file benchmarking a few ways to
+    // hide the event rows. My initial reaction to this was that the fastest way to hide
+    // the even rows was to inject CSS (though that makes things annoying to maintain).
+
+    // With a huge amount of rows (50,000 in test file), injecting CSS prevents the
+    // javascript from locking up.
+
+    $("head").append("<style>ul > li:nth-child(even) { display: none; }</style>");
     </xmp>
+    <a href="test.html">Evan's test file</a> (open console, some tests can take 30 seconds)
         </dd>
         <dt>Build two arrays containing odd and even rows respectively.</dt>
         <dd>
     <xmp>
-    // your js code
+    // jquery objects
+    var evens = $(".even");
+    var odds = $(".odd");
+
+    // or dom elements
+    var evens = $(".even").map(function() {
+      return $(this).get(0);
+    });
+    var odds = $(".odd").map(function() {
+      return $(this).get(0);
+    });
     </xmp>
         </dd>
         <dt>Rearrange nodes in reverse order</dt>
         <dd>
     <xmp>
-    // your js code
+    $("ul").html($("ul > li").get().reverse());
     </xmp>
         </dd>
     </dl>
